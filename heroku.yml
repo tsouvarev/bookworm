@@ -3,4 +3,4 @@ build:
     web: Dockerfile
     target: release
 run:
-  web: gunicorn bookworm:app
+  web: gunicorn app:app

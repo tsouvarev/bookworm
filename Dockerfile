@@ -6,8 +6,9 @@ RUN pip install -r requirements.txt
 FROM base as dev
 COPY requirements.dev.txt .
 RUN pip install -r requirements.dev.txt
+ENV FLASK_APP=bookworm.py
 CMD flask run -h 0.0.0.0 -p 3000
 
 FROM base as release
 COPY . .
-RUN gunicorn app:app
+RUN gunicorn bookworm:app

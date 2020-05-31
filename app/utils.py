@@ -14,4 +14,4 @@ def pretty_date(dt):
 
 
 def now():
-    return pendulum.now('Europe/Moscow')
+    return pendulum.now("Europe/Moscow")

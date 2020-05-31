@@ -9,4 +9,4 @@ compile:
 	pip-compile requirements.in -o requirements.txt -q
 
 run:
-	docker-compose run --build
+	docker-compose up --build

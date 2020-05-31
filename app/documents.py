@@ -1,6 +1,6 @@
 import mongoengine
 
-from utils import now
+from .utils import now
 
 
 class Book(mongoengine.Document):
