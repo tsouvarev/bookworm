@@ -1,0 +1,6 @@
+build:
+  docker:
+    web: Dockerfile
+    target: release
+run:
+  web: gunicorn bookworm:app

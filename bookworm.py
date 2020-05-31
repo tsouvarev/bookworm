@@ -6,9 +6,9 @@ from flask import (Flask, render_template, request,
                    send_from_directory)
 from flask_httpauth import HTTPBasicAuth
 
-from .documents import Book
-from .forms import AddBoookForm
-from .utils import pretty_date
+from documents import Book
+from forms import AddBoookForm
+from utils import pretty_date
 
 load_dotenv()
 
