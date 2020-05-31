@@ -1,0 +1,40 @@
+{% macro render_field(field) %}
+    {{ field.label }}{{ field }}
+    <div class="error">
+        {% for error in field.errors %}
+            {{ error }}
+        {%- endfor %}
+    </div>
+{% endmacro %}
+
+<form method="post">
+    <div class="row">
+        <div class="three columns">
+            {{ render_field(add_book_form.author) }}
+        </div>
+
+        <div class="seven columns">
+            {{ render_field(add_book_form.title) }}
+        </div>
+
+        <div class="two columns">
+            {{ render_field(add_book_form.pages_number) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="three columns">
+            {{ render_field(add_book_form.date_start) }}
+        </div>
+        <div class="three columns">
+            {{ render_field(add_book_form.date_end) }}
+        </div>
+    </div>
+
+    <div class="row">
+        {{ render_field(add_book_form.comment) }}
+    </div>
+
+    {{ add_book_form.csrf_token }}
+    <input type="submit" value="Добавить">
+</form>

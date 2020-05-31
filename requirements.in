@@ -1,0 +1,8 @@
+flask
+flask-wtf
+flask-httpauth
+gunicorn
+jinja2
+python-dotenv
+mongoengine
+pendulum
