@@ -35,7 +35,7 @@ def books():
                 comment=form.data["comment"],
             ).save()
 
-    books = Book.objects.all()
+    books = Book.objects.order_by('-date_start')
     return render_template("reading_list.html", books=books, add_book_form=form)
 
 
