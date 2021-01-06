@@ -5,6 +5,7 @@ services:
     build:
       context: .
       target: dev
+    tty: true
     links:
       - db
     depends_on:

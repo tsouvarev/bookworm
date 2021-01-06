@@ -17,4 +17,4 @@ compile:
 	pip-compile requirements.in -o requirements.txt -q
 
 run:
-	docker-compose up --build
+	docker-compose up --build app
