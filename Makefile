@@ -2,6 +2,11 @@ format:
 	black .
 	isort --recursive .
 
+check:
+	isort --check-only --diff .
+	black --check .
+	flake8 --config flake8.ini
+
 install:
 	pip install -r requirements.dev.txt
 

@@ -3,7 +3,6 @@ import os
 import mongoengine
 from dotenv import load_dotenv
 from flask import Flask
-from flask_httpauth import HTTPBasicAuth
 
 from app.utils import pretty_date
 from app.views import router
