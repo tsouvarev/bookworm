@@ -14,4 +14,7 @@ app.secret_key = os.environ["SECRET_KEY"]
 app.template_filter()(pretty_date)
 app.register_blueprint(router)
 
+if os.environ.get("FLASK_ENV") == "development":
+    app.config["TEMPLATES_AUTO_RELOAD"] = True
+
 mongoengine.connect(host=os.environ["MONGO_URI"])
