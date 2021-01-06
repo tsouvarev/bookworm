@@ -7,3 +7,4 @@ python-dotenv
 mongoengine
 dnspython  # for mongo+srv scheme
 pendulum
+marshmallow

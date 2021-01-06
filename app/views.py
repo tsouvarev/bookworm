@@ -1,10 +1,12 @@
 import os
+from http import HTTPStatus
 
 from flask import Blueprint, render_template, request
 from flask_httpauth import HTTPBasicAuth
+from marshmallow import ValidationError
 
 from .documents import Book
-from .forms import AddBoookForm
+from .schemes import AddBoookSchema, BookSchema
 
 router = Blueprint(
     "router", __name__, template_folder="../templates", static_folder="../static"
@@ -17,26 +19,35 @@ def verify_password(username, password):
     return username == os.environ["USER"] and password == os.environ["PASSWORD"]
 
 
-@router.route("/", methods=["GET", "POST"])
+@router.route("/", methods=["GET"])
 @auth.login_required
-def books():
-    form = AddBoookForm()
+def start():
+    return render_template("start.html")
 
-    if request.method == "POST":
-        if request.form.get("action") == "delete":
-            Book.objects.get(id=request.form["id"]).delete()
-        elif form.validate():
-            Book(
-                author=form.data["author"],
-                title=form.data["title"],
-                pages_number=form.data["pages_number"],
-                date_start=form.data["date_start"],
-                date_end=form.data["date_end"],
-                comment=form.data["comment"],
-            ).save()
 
+@router.route("/books/", methods=["GET"])
+@auth.login_required
+def books_list():
     books = Book.objects.order_by("-date_start")
-    return render_template("reading_list.html", books=books, add_book_form=form)
+    return BookSchema().dumps(books, many=True)
+
+
+@router.route("/books/", methods=["POST"])
+@auth.login_required
+def add_book():
+    try:
+        data = AddBoookSchema().load(request.json)
+    except ValidationError as err:
+        return {"errors": err.messages}, HTTPStatus.BAD_REQUEST
+    book = Book(**data).save()
+    return BookSchema().dumps(book)
+
+
+@router.route("/books/<book_id>/", methods=["DELETE"])
+@auth.login_required
+def delete_book(book_id):
+    Book.objects.filter(id=book_id).delete()
+    return {}
 
 
 @router.route("/stats")

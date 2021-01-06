@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Прочтенные книги{% endblock %}
+
+{% block head %}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+{% endblock %}
+
+{% block script %}
+    <script src="static/app.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div v-show="!isLoading">
+        {% include 'add_form.html' %}
+        <template v-if="books.length">
+            {% include "books_list.html" %}
+        </template>
+        <template v-else>
+            <div class="alert alert-info">Ничего нет</div>
+        </template>
+    </div>
+{% endblock %}
