@@ -1,6 +1,6 @@
 format:
 	black .
-	isort --recursive .
+	isort .
 
 check:
 	isort --check-only --diff .
