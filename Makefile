@@ -18,3 +18,6 @@ compile:
 
 run:
 	docker-compose up --build app
+
+generate:
+	python -m app.generate
