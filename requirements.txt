@@ -5,22 +5,22 @@
 #    pip-compile --output-file=requirements.txt requirements.in
 #
 click==7.1.2              # via flask
-flask-httpauth==4.0.0     # via -r requirements.in
+flask-httpauth==4.2.0     # via -r requirements.in
 flask-wtf==0.14.3         # via -r requirements.in
 flask==1.1.2              # via -r requirements.in, flask-httpauth, flask-wtf
 gunicorn==20.0.4          # via -r requirements.in
 itsdangerous==1.1.0       # via flask, flask-wtf
 jinja2==2.11.2            # via -r requirements.in, flask
 markupsafe==1.1.1         # via jinja2, wtforms
-mongoengine==0.20.0       # via -r requirements.in
-pendulum==2.1.0           # via -r requirements.in
-pymongo==3.10.1           # via mongoengine
+mongoengine==0.22.1       # via -r requirements.in
+pendulum==2.1.2           # via -r requirements.in
+pymongo==3.11.2           # via mongoengine
 python-dateutil==2.8.1    # via pendulum
-python-dotenv==0.13.0     # via -r requirements.in
-pytzdata==2019.3          # via pendulum
+python-dotenv==0.15.0     # via -r requirements.in
+pytzdata==2020.1          # via pendulum
 six==1.15.0               # via python-dateutil
 werkzeug==1.0.1           # via flask
-wtforms==2.3.1            # via flask-wtf
+wtforms==2.3.3            # via flask-wtf
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
