@@ -1,54 +1,68 @@
-<form v-on:submit.prevent="create_book" id="new_book">
-  <div class="row">
-    <div class="three columns">
-      <label for="author">Автор</label>
-      <input type="text" name="author" v-model="new_book.author">
-      <div class="error" v-show="new_book_errors.author">
-        [[ new_book_errors.author ]]
-      </div>
-    </div>
+<div class="modal" v-show="show_add_form">
+  <div class="modal-inner">
+    <div class="modal-content">
+      <div class="modal-content-inner">
+        <div class="row">
+          <div class="three columns">
+            <label for="author">Автор</label>
+            <input type="text" name="author" v-model="new_book.author">
+            <div class="error" v-show="new_book_errors.author">
+              [[ new_book_errors.author ]]
+            </div>
+          </div>
 
-    <div class="seven columns">
-      <label for="title">Название</label>
-      <input type="text" name="title" v-model="new_book.title">
-      <div class="error" v-show="new_book_errors.title">
-        [[ new_book_errors.title ]]
-      </div>
-    </div>
+          <div class="seven columns">
+            <label for="title">Название</label>
+            <input type="text" name="title" v-model="new_book.title">
+            <div class="error" v-show="new_book_errors.title">
+              [[ new_book_errors.title ]]
+            </div>
+          </div>
 
-    <div class="two columns">
-      <label for="pages_number">Число страниц</label>
-      <input type="integer" name="pages_number" v-model="new_book.pages_number">
-      <div class="error" v-show="new_book_errors.pages_number">
-        [[ new_book_errors.pages_number ]]
+          <div class="two columns">
+            <label for="pages_number">Число страниц</label>
+            <input type="integer" name="pages_number" v-model="new_book.pages_number">
+            <div class="error" v-show="new_book_errors.pages_number">
+              [[ new_book_errors.pages_number ]]
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="three columns">
+            <label for="date_start">Дата начала чтения</label>
+            <input type="date" name="date_start" v-model="new_book.date_start">
+            <div class="error" v-show="new_book_errors.date_start">
+              [[ new_book_errors.date_start ]]
+            </div>
+          </div>
+          <div class="three columns">
+            <label for="date_end">Дата окончания чтения</label>
+            <input type="date" name="date_end" v-model="new_book.date_end">
+            <div class="error" v-show="new_book_errors.date_end">
+              [[ new_book_errors.date_end ]]
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="comment">Комментарий</label>
+          <textarea name="comment" rows="5" v-model="new_book.comment"></textarea>
+          <div class="error" v-show="new_book_errors.comment">
+            [[ new_book_errors.comment ]]
+          </div>
+        </div>
+      </div>
+      <div class="modal-buttons">
+        <button class="button" v-on:click="show_add_form=false">Закрыть</button>
+        <button class="button button-primary" v-on:click.prevent="create_book">
+          Сохранить
+        </button>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="row">
-    <div class="three columns">
-      <label for="date_start">Дата начала чтения</label>
-      <input type="date" name="date_start" v-model="new_book.date_start">
-      <div class="error" v-show="new_book_errors.date_start">
-        [[ new_book_errors.date_start ]]
-      </div>
-    </div>
-    <div class="three columns">
-      <label for="date_end">Дата окончания чтения</label>
-      <input type="date" name="date_end" v-model="new_book.date_end">
-      <div class="error" v-show="new_book_errors.date_end">
-        [[ new_book_errors.date_end ]]
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <label for="comment">Комментарий</label>
-    <textarea name="comment" rows="5" v-model="new_book.comment"></textarea>
-    <div class="error" v-show="new_book_errors.comment">
-      [[ new_book_errors.comment ]]
-    </div>
-  </div>
-
-  <input type="submit" value="Добавить">
-</form>
+<button class="button" v-show="!show_add_form" v-on:click="show_add_form=true">
+  Добавить книгу
+</button>

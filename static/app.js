@@ -4,7 +4,8 @@ new Vue({
     books: [],
     isLoading: true,
     new_book: {},
-    new_book_errors: {}
+    new_book_errors: {},
+    show_add_form: false,
   },
   delimiters: ["[[", "]]"],
   mounted() {
