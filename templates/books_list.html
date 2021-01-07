@@ -1,28 +1,28 @@
 <table>
-    <tr>
-        <th>Автор</th>
-        <th>Название</th>
-        <th>Число страниц</th>
-        <th>Дата начала</th>
-        <th>Дата окончания</th>
-        <th>Комментарий</th>
-        <th>Действия</th>
-    </tr>
-    <tr v-for="book in books">
-        <td>[[ book.author ]]</td>
-        <td>[[ book.title ]]</td>
-        <td>[[ book.pages_number ]]</td>
-        <td>
-            <span v-if="book.date_start">[[ book.date_start ]]</span>
-            <span v-else>&mdash;</span>
-        </td>
-        <td>
-            <span v-if="book.date_end">[[ book.date_end ]]</span>
-            <span v-else>&mdash;</span>
-        </td>
-        <td>[[ book.comment ]]</td>
-        <td>
-            <button v-on:click="delete_book(book.id)">Удалить</button>
-        </td>
-    </tr>
+  <tr>
+    <th>Автор</th>
+    <th>Название</th>
+    <th>Число страниц</th>
+    <th>Дата начала</th>
+    <th>Дата окончания</th>
+    <th>Комментарий</th>
+    <th>Действия</th>
+  </tr>
+  <tr v-for="book in books">
+    <td>[[ book.author ]]</td>
+    <td>[[ book.title ]]</td>
+    <td>[[ book.pages_number ]]</td>
+    <td>
+      <span v-if="book.date_start">[[ book.date_start ]]</span>
+      <span v-else>&mdash;</span>
+    </td>
+    <td>
+      <span v-if="book.date_end">[[ book.date_end ]]</span>
+      <span v-else>&mdash;</span>
+    </td>
+    <td>[[ book.comment ]]</td>
+    <td>
+      <button v-on:click="delete_book(book.id)">Удалить</button>
+    </td>
+  </tr>
 </table>

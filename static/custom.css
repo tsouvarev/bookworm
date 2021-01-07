@@ -1,11 +1,11 @@
 body {
-    margin-top: 5rem;
+  margin-top: 5rem;
 }
 
 .row input, .row textarea {
-    width: 100%;
+  width: 100%;
 }
 
 .error {
-    color: red;
+  color: red;
 }
