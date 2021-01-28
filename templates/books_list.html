@@ -21,7 +21,10 @@
       <span v-else>&mdash;</span>
     </td>
     <td>[[ book.comment ]]</td>
-    <td>
+    <td class="actions">
+      <button v-on:click="show_edit_form=true; edited_book=book">
+        <i class="fas fa-edit"></i>
+      </button>
       <button v-on:click="delete_book(book.id)">
         <i class="fas fa-ban"></i>
       </button>

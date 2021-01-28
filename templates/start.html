@@ -4,6 +4,20 @@
 
 {% block head %}
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <style>
+    td.actions {
+      white-space: nowrap;
+    }
+    td.actions button {
+      padding: 0px 13px;
+    }
+    .fa-ban {
+      color: red;
+    }
+    .fa-edit {
+      color: mediumseagreen;
+    }
+  </style>
 {% endblock %}
 
 {% block script %}
@@ -13,6 +27,7 @@
 {% block body %}
   <div v-show="!isLoading">
     {% include 'add_form.html' %}
+    {% include 'edit_form.html' %}
     <template v-if="books.length">
       {% include "books_list.html" %}
     </template>

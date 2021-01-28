@@ -5,7 +5,10 @@ new Vue({
     isLoading: true,
     new_book: {},
     new_book_errors: {},
+    edited_book: {},
+    edited_book_errors: {},
     show_add_form: false,
+    show_edit_form: false,
   },
   delimiters: ["[[", "]]"],
   mounted() {
@@ -21,6 +24,14 @@ new Vue({
         this.new_book_errors = {};
       }).catch(error => {
         this.new_book_errors = error.response.data.errors;
+      })
+    },
+    edit_book: function (book_id) {
+      axios.patch(`/books/${book_id}/`, _.omit(this.edited_book, 'id')).then(response => {
+        this.edited_book_errors = {};
+        this.show_edit_form=false;
+      }).catch(error => {
+        this.edited_book_errors = error.response.data.errors;
       })
     },
     delete_book: function (book_id) {

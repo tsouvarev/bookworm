@@ -6,7 +6,7 @@ from flask_httpauth import HTTPBasicAuth
 from marshmallow import ValidationError
 
 from .documents import Book
-from .schemes import AddBoookSchema, BookSchema
+from .schemes import AddBoookSchema, BookSchema, EditBoookSchema
 
 router = Blueprint(
     "router", __name__, template_folder="../templates", static_folder="../static"
@@ -41,6 +41,17 @@ def add_book():
         return {"errors": err.messages}, HTTPStatus.BAD_REQUEST
     book = Book(**data).save()
     return BookSchema().dumps(book)
+
+
+@router.route("/books/<book_id>/", methods=["PATCH"])
+@auth.login_required
+def edit_book(book_id):
+    try:
+        data = EditBoookSchema().load(request.json)
+    except ValidationError as err:
+        return {"errors": err.messages}, HTTPStatus.BAD_REQUEST
+    Book.objects.filter(id=book_id).update(**data)
+    return {}
 
 
 @router.route("/books/<book_id>/", methods=["DELETE"])

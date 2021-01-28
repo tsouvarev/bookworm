@@ -18,3 +18,12 @@ class AddBoookSchema(Schema):
     date_start = fields.Date()
     date_end = fields.Date()
     comment = fields.String()
+
+
+class EditBoookSchema(Schema):
+    author = fields.String(allow_none=True)
+    title = fields.String(allow_none=True)
+    pages_number = fields.Integer(allow_none=True)
+    date_start = fields.Date(allow_none=True)
+    date_end = fields.Date(allow_none=True)
+    comment = fields.String(allow_none=True)
