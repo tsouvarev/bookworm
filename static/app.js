@@ -35,10 +35,12 @@ new Vue({
         this.edited_book_errors = error.response.data.errors;
       })
     },
-    delete_book: function (book_id) {
-      axios.delete(`/books/${book_id}/`).then(response => {
-        this.books = this.books.filter(value => value.id != book_id);
-      })
+    delete_book: function (book) {
+      if (confirm(`Удалить книгу "${book.title}"?`)) {
+        axios.delete(`/books/${book.id}/`).then(response => {
+          this.books = this.books.filter(value => value.id != book.id);
+        })
+      }
     }
   }
 });
