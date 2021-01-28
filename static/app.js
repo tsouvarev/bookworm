@@ -26,8 +26,9 @@ new Vue({
         this.new_book_errors = error.response.data.errors;
       })
     },
-    edit_book: function (book_id) {
-      axios.patch(`/books/${book_id}/`, _.omit(this.edited_book, 'id')).then(response => {
+    edit_book: function () {
+      let { id: book_id, ...data } = this.edited_book;
+      axios.patch(`/books/${book_id}/`, data).then(response => {
         this.edited_book_errors = {};
         this.show_edit_form=false;
       }).catch(error => {
