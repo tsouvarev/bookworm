@@ -22,7 +22,9 @@
     </td>
     <td>[[ book.comment ]]</td>
     <td>
-      <button v-on:click="delete_book(book.id)">Удалить</button>
+      <button v-on:click="delete_book(book.id)">
+        <i class="fas fa-ban"></i>
+      </button>
     </td>
   </tr>
 </table>
