@@ -9,6 +9,7 @@ dnspython==2.0.0          # via -r requirements.in
 flask-httpauth==4.2.0     # via -r requirements.in
 flask-wtf==0.14.3         # via -r requirements.in
 flask==1.1.2              # via -r requirements.in, flask-httpauth, flask-wtf
+funcy==1.15               # via -r requirements.in
 gunicorn==20.0.4          # via -r requirements.in
 itsdangerous==1.1.0       # via flask, flask-wtf
 jinja2==2.11.2            # via -r requirements.in, flask

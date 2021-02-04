@@ -3,6 +3,7 @@ from http import HTTPStatus
 
 from flask import Blueprint, render_template, request
 from flask_httpauth import HTTPBasicAuth
+from funcy import group_by
 from marshmallow import ValidationError
 
 from .documents import Book
@@ -64,5 +65,8 @@ def delete_book(book_id):
 @router.route("/stats")
 @auth.login_required
 def stats():
-    total_pages_number = Book.objects.sum("pages_number")
-    return render_template("stats.html", total_pages_number=total_pages_number)
+    books = Book.objects.order_by("-date_start")
+    grouped_by_month = group_by(
+        lambda book: (book.date_start.year, book.date_start.month), books
+    )
+    return render_template("stats.html", grouped=grouped_by_month)

@@ -3,5 +3,18 @@
 {% block title %}Статистика{% endblock %}
 
 {% block body %}
-  Число прочитанных страниц: {{ total_pages_number }}
+  <table>
+    <thead>
+      <tr>
+        <th>Месяц</th><th>Число книг</th><th>Число страниц</th>
+      </tr>
+    </thead>
+    {% for (year, month), books in grouped.items() %}
+      <tr>
+        <td>{{ month|readable_month }} {{ year }}</td>
+        <td>{{ books|length }}</td>
+        <td>{{ books|sum(attribute='pages_number') }}</td>
+      </tr>
+    {% endfor %}
+  </table>
 {% endblock %}
