@@ -23,6 +23,7 @@ python-dotenv==0.15.0     # via -r requirements.in
 pytzdata==2020.1          # via pendulum
 six==1.15.0               # via python-dateutil
 werkzeug==1.0.1           # via flask
+whatever==0.6             # via -r requirements.in
 wtforms==2.3.3            # via flask-wtf
 
 # The following packages are considered to be unsafe in a requirements file:

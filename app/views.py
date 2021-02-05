@@ -3,11 +3,11 @@ from http import HTTPStatus
 
 from flask import Blueprint, render_template, request
 from flask_httpauth import HTTPBasicAuth
-from funcy import group_by
 from marshmallow import ValidationError
 
 from .documents import Book
 from .schemes import AddBoookSchema, BookSchema, EditBoookSchema
+from .utils import group_books
 
 router = Blueprint(
     "router", __name__, template_folder="../templates", static_folder="../static"
@@ -66,7 +66,4 @@ def delete_book(book_id):
 @auth.login_required
 def stats():
     books = Book.objects.order_by("-date_start")
-    grouped_by_month = group_by(
-        lambda book: (book.date_start.year, book.date_start.month), books
-    )
-    return render_template("stats.html", grouped=grouped_by_month)
+    return render_template("stats.html", grouped=group_books(books))

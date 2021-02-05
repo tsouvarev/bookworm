@@ -9,3 +9,4 @@ dnspython  # for mongo+srv scheme
 pendulum
 marshmallow
 funcy
+whatever

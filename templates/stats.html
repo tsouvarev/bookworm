@@ -2,19 +2,37 @@
 
 {% block title %}Статистика{% endblock %}
 
+{% block head %}
+  <style>
+    tfoot td {
+      font-weight: bold;
+    }
+  </style>
+{% endblock %}
+
 {% block body %}
-  <table>
-    <thead>
-      <tr>
-        <th>Месяц</th><th>Число книг</th><th>Число страниц</th>
-      </tr>
-    </thead>
-    {% for (year, month), books in grouped.items() %}
-      <tr>
-        <td>{{ month|readable_month }} {{ year }}</td>
-        <td>{{ books|length }}</td>
-        <td>{{ books|sum(attribute='pages_number') }}</td>
-      </tr>
-    {% endfor %}
-  </table>
+  {% for (year, grouped_by_month) in grouped %}
+    <table>
+      <caption><h5>{{ year }}</h5></caption>
+      <thead>
+        <tr>
+          <th>Месяц</th><th>Число книг</th><th>Число страниц</th>
+        </tr>
+      </thead>
+      {% for grouped_item in grouped_by_month %}
+        <tr>
+          <td>{{ grouped_item.month|readable_month }}</td>
+          <td>{{ grouped_item.data|length }}</td>
+          <td>{{ grouped_item.pages_sum }}</td>
+        </tr>
+      {% endfor %}
+      <tfoot>
+        <tr>
+          <td>Всего</td>
+          <td>{{ grouped_by_month|sum(attribute='books_number') }}</td>
+          <td>{{ grouped_by_month|sum(attribute='pages_sum') }}</td>
+        </tr>
+      </tfoot>
+    </table>
+  {% endfor %}
 {% endblock %}
