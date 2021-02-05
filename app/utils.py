@@ -1,10 +1,24 @@
-from calendar import month_name
 from collections import defaultdict
 from dataclasses import dataclass
 from itertools import starmap
 from typing import Dict, Iterable
 
 import pendulum
+
+READABLE_MONTH_NAMES = [
+    "Январь",
+    "Февраль",
+    "Март",
+    "Апрель",
+    "Май",
+    "Июнь",
+    "Июль",
+    "Август",
+    "Сентябрь",
+    "Октябрь",
+    "Ноябрь",
+    "Декабрь",
+]
 
 
 @dataclass
@@ -26,7 +40,7 @@ def now():
 
 
 def get_readable_month_name(month_number):
-    return month_name[month_number]
+    return READABLE_MONTH_NAMES[month_number - 1]
 
 
 def group_books(books):
