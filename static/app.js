@@ -1,14 +1,15 @@
-new Vue({
-  el: "#app",
-  data: {
-    books: [],
-    isLoading: true,
-    new_book: {},
-    new_book_errors: {},
-    edited_book: {},
-    edited_book_errors: {},
-    show_add_form: false,
-    show_edit_form: false,
+var app = Vue.createApp({
+  data: function () {
+    return {
+      books: [],
+      isLoading: true,
+      new_book: {},
+      new_book_errors: {},
+      edited_book: {},
+      edited_book_errors: {},
+      show_add_form: false,
+      show_edit_form: false,
+    }
   },
   delimiters: ["[[", "]]"],
   mounted() {
@@ -44,6 +45,7 @@ new Vue({
     }
   }
 });
+app.mount('#app');
 
 let csrf_meta_tag = document.querySelector('meta[name="csrf-token"]');
 let csrf_token = csrf_meta_tag.getAttribute('content');
