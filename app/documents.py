@@ -10,3 +10,4 @@ class Book(mongoengine.Document):
     date_start = mongoengine.DateField(default=now)
     date_end = mongoengine.DateField()
     comment = mongoengine.StringField()
+    rating = mongoengine.IntField()

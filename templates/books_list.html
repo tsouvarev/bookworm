@@ -5,6 +5,7 @@
     <th>Число страниц</th>
     <th>Дата начала</th>
     <th>Дата окончания</th>
+    <th>Рейтинг</th>
     <th>Комментарий</th>
     <th>Действия</th>
   </tr>
@@ -19,6 +20,9 @@
     <td>
       <span v-if="book.date_end">[[ book.date_end ]]</span>
       <span v-else>&mdash;</span>
+    </td>
+    <td width="20%">
+      <div class="rating"><label class="full checked" v-for="i in book.rating"></label></div>
     </td>
     <td>[[ book.comment ]]</td>
     <td class="actions">

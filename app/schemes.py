@@ -9,6 +9,7 @@ class BookSchema(Schema):
     date_start = fields.Date()
     date_end = fields.Date()
     comment = fields.String()
+    rating = fields.Integer()
 
 
 class AddBoookSchema(Schema):
@@ -18,6 +19,7 @@ class AddBoookSchema(Schema):
     date_start = fields.Date()
     date_end = fields.Date()
     comment = fields.String()
+    rating = fields.Integer()
 
 
 class EditBoookSchema(Schema):
@@ -27,3 +29,4 @@ class EditBoookSchema(Schema):
     date_start = fields.Date(allow_none=True)
     date_end = fields.Date(allow_none=True)
     comment = fields.String(allow_none=True)
+    rating = fields.Integer(allow_none=True)

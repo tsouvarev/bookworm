@@ -43,6 +43,24 @@
               [[ edited_book_errors.date_end ]]
             </div>
           </div>
+          <div class="three columns">
+            <label for="rating">Рейтинг</label>
+            <fieldset class="rating">
+                <input type="radio" id="edit_star5" name="rating" v-model="edited_book.rating" value="5" />
+                <label class="full" for="edit_star5"></label>
+                <input type="radio" id="edit_star4" name="rating" v-model="edited_book.rating" value="4" />
+                <label class="full" for="edit_star4"></label>
+                <input type="radio" id="edit_star3" name="rating" v-model="edited_book.rating" value="3" />
+                <label class="full" for="edit_star3"></label>
+                <input type="radio" id="edit_star2" name="rating" v-model="edited_book.rating" value="2" />
+                <label class="full" for="edit_star2"></label>
+                <input type="radio" id="edit_star1" name="rating" v-model="edited_book.rating" value="1" />
+                <label class="full" for="edit_star1"></label>
+            </fieldset>
+            <div class="error" v-show="edited_book_errors.rating">
+              [[ edited_book_errors.rating ]]
+            </div>
+          </div>
         </div>
 
         <div class="row">
