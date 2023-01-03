@@ -17,4 +17,3 @@ ARG MONGO_URI
 ARG USER
 ARG PASSWORD
 COPY . .
-RUN gunicorn bookworm:app
