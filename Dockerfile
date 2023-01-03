@@ -12,5 +12,9 @@ ENV FLASK_APP=bookworm.py
 CMD flask run -h 0.0.0.0 -p 3000
 
 FROM base as release
+ARG SECRET_KEY
+ARG MONGO_URI
+ARG USER
+ARG PASSWORD
 COPY . .
 RUN gunicorn bookworm:app
