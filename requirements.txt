@@ -29,9 +29,10 @@ jinja2==3.0.3
     # via
     #   -r requirements.in
     #   flask
-markupsafe==2.0.1
+markupsafe==2.1.2
     # via
     #   jinja2
+    #   werkzeug
     #   wtforms
 marshmallow==3.14.1
     # via -r requirements.in
@@ -49,7 +50,7 @@ pytzdata==2020.1
     # via pendulum
 six==1.16.0
     # via python-dateutil
-werkzeug==2.0.3
+werkzeug==2.2.3
     # via flask
 whatever==0.6
     # via -r requirements.in
