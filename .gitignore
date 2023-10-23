@@ -132,3 +132,4 @@ dmypy.json
 .env
 pycharm
 .pycharm_helpers
+.vscode
