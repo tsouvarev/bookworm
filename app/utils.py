@@ -1,23 +1,23 @@
 from collections import defaultdict
+from collections.abc import Iterable
 from dataclasses import dataclass
 from itertools import starmap
-from typing import Dict, Iterable
 
 import pendulum
 
 READABLE_MONTH_NAMES = [
-    "Январь",
-    "Февраль",
-    "Март",
-    "Апрель",
-    "Май",
-    "Июнь",
-    "Июль",
-    "Август",
-    "Сентябрь",
-    "Октябрь",
-    "Ноябрь",
-    "Декабрь",
+    'Январь',
+    'Февраль',
+    'Март',
+    'Апрель',
+    'Май',
+    'Июнь',
+    'Июль',
+    'Август',
+    'Сентябрь',
+    'Октябрь',
+    'Ноябрь',
+    'Декабрь',
 ]
 
 
@@ -36,7 +36,7 @@ class GroupedBooks:
 
 
 def now():
-    return pendulum.now("Europe/Moscow")
+    return pendulum.now('Europe/Moscow')
 
 
 def get_readable_month_name(month_number):
@@ -53,5 +53,5 @@ def group_books(books):
         yield year, aggregated_books
 
 
-def _aggregate_books(grouped_by_month: Dict[int, list]) -> Iterable[GroupedBooks]:
+def _aggregate_books(grouped_by_month: dict[int, list]) -> Iterable[GroupedBooks]:
     yield from starmap(GroupedBooks, grouped_by_month.items())

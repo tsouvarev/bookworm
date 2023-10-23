@@ -2,13 +2,13 @@ from tests.factories import BookFactory
 
 
 def generate_objects():
-    print("Creating books...")
+    print('Creating books...')
     BookFactory.create_batch(size=10)
-    print("Done.")
+    print('Done.')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # have to import top-level package to initialize mongoengine
-    import bookworm  # noqa
+    import bookworm  # noqa: F401
 
     generate_objects()

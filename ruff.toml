@@ -1,0 +1,22 @@
+target-version = 'py311'
+select = ['ALL']
+ignore = [
+    'D',  # docstring rules
+    'ANN',  # annotations
+    'A003',  # class attribute is shadowing a Python builtin
+    'SLF001',  # private member accessed
+    'COM812', # trailing comma missing
+]
+
+[flake8-quotes]
+inline-quotes = 'single'
+
+[isort]
+combine-as-imports = true
+
+[format]
+quote-style = 'single'
+skip-magic-trailing-comma = true
+
+[per-file-ignores]
+'app/generate.py' = ['T201']

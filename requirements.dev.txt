@@ -1,7 +1,6 @@
 -r requirements.txt
 black
-isort
-flake8
 ipdb
 pip-tools
+ruff
 factory-boy

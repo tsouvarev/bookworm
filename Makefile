@@ -1,11 +1,10 @@
 format:
+	ruff . --fix
 	black .
-	isort .
 
 check:
-	isort --check-only --diff .
+	ruff .
 	black --check .
-	flake8 --config flake8.ini
 
 install:
 	pip install -r requirements.dev.txt
