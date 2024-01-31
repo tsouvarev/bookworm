@@ -28,11 +28,6 @@
       {% endfor %}
       <tfoot>
         <tr>
-          <td>Всего</td>
-          <td>{{ books_by_year.stats.count }}</td>
-          <td>{{ books_by_year.stats.pages }}</td>
-        </tr>
-        <tr>
           <td>Полезных</td>
           <td>{{ books_by_year.helpful_stats.count }}</td>
           <td>{{ books_by_year.helpful_stats.pages }} ({{ books_by_year.helpful_stats.pages_percent }}%)</td>
@@ -41,6 +36,11 @@
           <td>Английских</td>
           <td>{{ books_by_year.english_stats.count }}</td>
           <td>{{ books_by_year.english_stats.pages }} ({{ books_by_year.english_stats.pages_percent }}%)</td>
+        </tr>
+        <tr>
+          <td>Всего</td>
+          <td>{{ books_by_year.stats.count }}</td>
+          <td>{{ books_by_year.stats.pages }}</td>
         </tr>
       </tfoot>
     </table>
