@@ -96,6 +96,7 @@ def get_readable_month_name(month_number):
 
 
 def group_books(books: list[Book]) -> Iterable[BooksByYear]:
-    grouped_by_year = groupby(books, that.date_start.year)
+    finished_books = filter(that.date_end, books)
+    grouped_by_year = groupby(finished_books, that.date_start.year)
     for year, books in grouped_by_year:
         yield BooksByYear(year, list(books))
