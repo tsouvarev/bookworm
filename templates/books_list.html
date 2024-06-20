@@ -11,11 +11,7 @@
   </tr>
   <tr v-for="book in books">
     <td>[[ book.author ]]</td>
-    <td>
-      <a v-bind:href="'https://www.google.com/search?q=книга' + ' ' + book.title + ' ' + book.author">
-        [[ book.title ]]
-      </a>
-    </td>
+    <td>[[ book.title ]]</td>
     <td>[[ book.pages_number ]]</td>
     <td>
       <span v-if="book.date_start">[[ book.date_start ]]</span>
@@ -30,6 +26,11 @@
     </td>
     <td>[[ book.comment ]]</td>
     <td class="actions">
+      <button>
+        <a target="_blank" v-bind:href="'https://www.google.com/search?q=книга' + ' ' + book.title + ' ' + book.author">
+          <i class="fas fa-link"></i>
+        </a>
+      </button>
       <button v-on:click="show_edit_form=true; edited_book=book">
         <i class="fas fa-edit"></i>
       </button>

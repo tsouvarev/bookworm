@@ -9,3 +9,7 @@ body {
 .error {
   color: red;
 }
+
+.actions button {
+  margin: 0 4px;
+}
