@@ -1,5 +1,6 @@
 format:
-	ruff . --fix
+	ruff format .
+	ruff check . --fix-only
 	black .
 
 check:
