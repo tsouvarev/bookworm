@@ -1,7 +1,7 @@
 import os
 from http import HTTPStatus
 
-from flask import Blueprint, render_template, request
+from flask import Blueprint, current_app, render_template, request
 from flask_httpauth import HTTPBasicAuth
 from marshmallow import ValidationError
 
@@ -17,6 +17,8 @@ auth = HTTPBasicAuth()
 
 @auth.verify_password
 def verify_password(username, password):
+    if current_app.config['TESTING']:
+        return True
     return username == os.environ['USER'] and password == os.environ['PASSWORD']
 
 

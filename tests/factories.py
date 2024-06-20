@@ -25,9 +25,6 @@ class BookFactory(MongoEngineFactory):
     author = factory.Faker('name')
     title = factory.Faker('catch_phrase')
     pages_number = factory.Faker('pyint')
-    date_start = factory.Faker('date')
-    date_end = factory.Faker('date')
-    comment = factory.Faker('text')
 
     class Meta:
         model = Book

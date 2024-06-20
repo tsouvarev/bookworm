@@ -5,6 +5,8 @@ services:
     build:
       context: .
       target: dev
+    environment:
+      MONGO_URI: mongodb://bookworm:bookworm@db
     tty: true
     links:
       - db
@@ -17,3 +19,6 @@ services:
 
   db:
     image: "mongo:4"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: bookworm
+      MONGO_INITDB_ROOT_PASSWORD: bookworm

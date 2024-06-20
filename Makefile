@@ -22,5 +22,8 @@ run:
 dev:
 	flask --app bookworm:create_app run
 
+test:
+	docker compose run app pytest
+
 generate:
 	python -m app.generate

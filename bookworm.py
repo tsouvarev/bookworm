@@ -11,13 +11,14 @@ from app.views import router
 load_dotenv()
 
 
-def create_app():
+def create_app(with_csrf=True):
     app = Flask(__name__, template_folder='../templates/')
     app.secret_key = os.environ['SECRET_KEY']
     app.register_blueprint(router)
     app.add_template_filter(get_readable_month_name, name='readable_month')
 
-    CSRFProtect(app)
+    if with_csrf:
+        CSRFProtect(app)
 
     if os.environ.get('FLASK_ENV') == 'development':
         app.config['TEMPLATES_AUTO_RELOAD'] = True

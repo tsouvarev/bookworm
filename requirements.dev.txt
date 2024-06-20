@@ -4,3 +4,5 @@ ipdb
 pip-tools
 ruff
 factory-boy
+pytest
+pytest-mock
