@@ -19,5 +19,8 @@ compile:
 run:
 	docker compose up --build app
 
+dev:
+	flask --app bookworm:create_app run
+
 generate:
 	python -m app.generate
