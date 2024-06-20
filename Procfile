@@ -1,1 +1,1 @@
-web: gunicorn bookworm:create_app()
+web: gunicorn 'bookworm:create_app()'
