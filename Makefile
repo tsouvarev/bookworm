@@ -20,7 +20,7 @@ run:
 	docker compose up --build app
 
 dev:
-	flask --app bookworm:create_app run
+	flask --app bookworm:create_app run --reload
 
 test:
 	docker compose run app pytest
