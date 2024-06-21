@@ -20,3 +20,4 @@ skip-magic-trailing-comma = true
 
 [per-file-ignores]
 'app/generate.py' = ['T201']
+'tests/*' = ['S101', 'PT013', 'PT004', 'RUF012', 'DTZ001']

@@ -1,8 +1,5 @@
 import re
-from collections.abc import Iterable
-from dataclasses import dataclass
-from itertools import groupby
-from typing import Optional
+from collections import defaultdict
 
 from whatever import that
 
@@ -22,81 +19,58 @@ READABLE_MONTH_NAMES = [
     'Ноябрь',
     'Декабрь',
 ]
-
-
-@dataclass
-class BooksStats:
-    books: list
-    total_stats: Optional['BooksStats'] = None
-
-    @property
-    def count(self):
-        return len(self.books)
-
-    @property
-    def percent(self):
-        if self.total_stats is None:
-            raise NotImplementedError
-        return round(self.count / self.total_stats.count * 100)
-
-    @property
-    def pages(self):
-        return sum(book.pages_number for book in self.books)
-
-    @property
-    def pages_percent(self):
-        if self.total_stats is None:
-            raise NotImplementedError
-        return round(self.pages / self.total_stats.pages * 100)
-
-
-@dataclass
-class BooksByMonth:
-    month: int
-    stats: BooksStats
-
-
-@dataclass
-class BooksByYear:
-    year: int
-    books: list[Book]
-
-    @property
-    def books_by_month(self) -> Iterable[BooksByMonth]:
-        grouped_by_month = groupby(self.books, that.date_start.month)
-        for month, books in grouped_by_month:
-            yield BooksByMonth(month, BooksStats(list(books)))
-
-    @property
-    def stats(self):
-        return BooksStats(self.books)
-
-    @property
-    def helpful_stats(self):
-        minimal_helpful_rating = 3
-        helpful_books = [
-            book
-            for book in self.books
-            if book.rating and book.rating > minimal_helpful_rating
-        ]
-        return BooksStats(helpful_books, total_stats=self.stats)
-
-    @property
-    def english_stats(self):
-        english_books = [
-            book
-            for book in self.books
-            if re.match('^[a-zA-Z0-9]+$', re.sub(r'[^\w]', '', book.title))
-        ]
-        return BooksStats(english_books, total_stats=self.stats)
+MINIMAL_HELPFUL_RATING = 3
 
 
 def get_readable_month_name(month_number):
     return READABLE_MONTH_NAMES[month_number - 1]
 
 
-def group_books(books: list[Book]) -> Iterable[BooksByYear]:
+def group_books(books: list[Book]) -> tuple[dict, dict, dict]:
     finished_books = filter(that.date_end, books)
-    grouped_by_year = groupby(finished_books, that.date_start.year)
-    for year, books in grouped_by_year:
-        yield BooksByYear(year, list(books))
+
+    monthly_stats = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
+    english_stats = defaultdict(lambda: defaultdict(int))
+    helpful_stats = defaultdict(lambda: defaultdict(int))
+    total_stats = defaultdict(lambda: defaultdict(int))
+
+    for book in finished_books:
+        _update_stats(monthly_stats, book, use_month=True)
+        _update_stats(total_stats, book)
+
+        if re.match('^[a-zA-Z0-9]+$', re.sub(r'[^\w]', '', book.title)):
+            _update_stats(english_stats, book)
+
+        if book.rating and book.rating > MINIMAL_HELPFUL_RATING:
+            _update_stats(helpful_stats, book)
+
+    _update_total_stats(english_stats, total_stats)
+    _update_total_stats(helpful_stats, total_stats)
+
+    return {
+        'monthly': monthly_stats,
+        'total': total_stats,
+        'english': english_stats,
+        'helpful': helpful_stats,
+    }
+
+
+def _update_stats(stats, book, *, use_month=False):
+    s = stats[book.date_start.year]
+    if use_month:
+        s = s[book.date_start.month]
+
+    s['count'] += 1
+    s['pages'] += book.pages_number
+
+
+def _update_total_stats(stats, total_stats):
+    for year in stats:
+        stats[year]['percent'] = _get_percent(stats, total_stats, year, field='count')
+        stats[year]['pages_percent'] = _get_percent(
+            stats, total_stats, year, field='pages'
+        )
+
+
+def _get_percent(stats, total_stats, year, field):
+    return round(stats[year][field] / total_stats[year][field] * 100)

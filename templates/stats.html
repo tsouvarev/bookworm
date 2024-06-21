@@ -11,36 +11,36 @@
 {% endblock %}
 
 {% block body %}
-  {% for books_by_year in grouped %}
+  {% for year in monthly %}
     <table>
-      <caption><h5>{{ books_by_year.year }}</h5></caption>
+      <caption><h5>{{ year }}</h5></caption>
       <thead>
         <tr>
           <th>Месяц</th><th>Число книг</th><th>Число страниц</th>
         </tr>
       </thead>
-      {% for books_by_month in books_by_year.books_by_month %}
+      {% for month, stats in monthly[year].items() %}
         <tr>
-          <td>{{ books_by_month.month|readable_month }}</td>
-          <td>{{ books_by_month.stats.count }}</td>
-          <td>{{ books_by_month.stats.pages }}</td>
+          <td>{{ month|readable_month }}</td>
+          <td>{{ stats['count'] }}</td>
+          <td>{{ stats['pages'] }}</td>
         </tr>
       {% endfor %}
       <tfoot>
         <tr>
           <td>Полезных</td>
-          <td>{{ books_by_year.helpful_stats.count }}</td>
-          <td>{{ books_by_year.helpful_stats.pages }} ({{ books_by_year.helpful_stats.pages_percent }}%)</td>
+          <td>{{ helpful[year]['count'] }}</td>
+          <td>{{ helpful[year]['pages'] }} ({{ helpful[year]['pages_percent'] }}%)</td>
         </tr>
         <tr>
           <td>Английских</td>
-          <td>{{ books_by_year.english_stats.count }}</td>
-          <td>{{ books_by_year.english_stats.pages }} ({{ books_by_year.english_stats.pages_percent }}%)</td>
+          <td>{{ english[year]['count'] }}</td>
+          <td>{{ english[year]['pages'] }} ({{ english[year]['pages_percent'] }}%)</td>
         </tr>
         <tr>
           <td>Всего</td>
-          <td>{{ books_by_year.stats.count }}</td>
-          <td>{{ books_by_year.stats.pages }}</td>
+          <td>{{ total[year]['count'] }}</td>
+          <td>{{ total[year]['pages'] }}</td>
         </tr>
       </tfoot>
     </table>

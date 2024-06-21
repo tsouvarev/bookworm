@@ -24,7 +24,7 @@ class MongoEngineFactory(factory.Factory):
 class BookFactory(MongoEngineFactory):
     author = factory.Faker('name')
     title = factory.Faker('catch_phrase')
-    pages_number = factory.Faker('pyint')
+    pages_number = 1
 
     class Meta:
         model = Book

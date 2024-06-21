@@ -11,7 +11,7 @@ from app.views import router
 load_dotenv()
 
 
-def create_app(with_csrf=True):
+def create_app(*, with_csrf=True):
     app = Flask(__name__, template_folder='../templates/')
     app.secret_key = os.environ['SECRET_KEY']
     app.register_blueprint(router)

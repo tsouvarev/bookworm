@@ -68,4 +68,4 @@ def delete_book(book_id):
 @auth.login_required
 def stats():
     books = Book.objects.order_by('-date_start')
-    return render_template('stats.html', grouped=group_books(books))
+    return render_template('stats.html', **group_books(books))
