@@ -28,3 +28,7 @@ class BookFactory(MongoEngineFactory):
 
     class Meta:
         model = Book
+
+    class Params:
+        with_date_end = factory.Trait(date_end=factory.Faker('date'))
+        with_date_start = factory.Trait(date_start=factory.Faker('date'))
