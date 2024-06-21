@@ -6,7 +6,6 @@
     <th>Дата начала</th>
     <th>Дата окончания</th>
     <th>Рейтинг</th>
-    <th>Комментарий</th>
     <th>Действия</th>
   </tr>
   <tr v-for="book in books">
@@ -24,7 +23,6 @@
     <td width="15%">
       <div class="rating"><label class="full checked" v-for="i in book.rating"></label></div>
     </td>
-    <td>[[ book.comment ]]</td>
     <td class="actions">
       <button>
         <a target="_blank" v-bind:href="'https://www.google.com/search?q=книга' + ' ' + book.title + ' ' + book.author">
