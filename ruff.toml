@@ -6,6 +6,7 @@ ignore = [
     'A003',  # class attribute is shadowing a Python builtin
     'SLF001',  # private member accessed
     'COM812', # trailing comma missing
+    'E731', # do not assign a `lambda` expression, use a `def`
 ]
 
 [flake8-quotes]

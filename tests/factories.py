@@ -1,4 +1,5 @@
 import factory
+import pendulum
 
 from app.documents import Book
 
@@ -30,5 +31,5 @@ class BookFactory(MongoEngineFactory):
         model = Book
 
     class Params:
-        with_date_end = factory.Trait(date_end=factory.Faker('date'))
-        with_date_start = factory.Trait(date_start=factory.Faker('date'))
+        with_date_end = factory.Trait(date_end=factory.LazyFunction(pendulum.now))
+        with_date_start = factory.Trait(date_start=factory.LazyFunction(pendulum.now))

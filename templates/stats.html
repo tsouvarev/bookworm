@@ -19,7 +19,8 @@
           <th>Месяц</th><th>Число книг</th><th>Число страниц</th>
         </tr>
       </thead>
-      {% for month, stats in monthly[year].items() %}
+      {% set sorted_months = monthly[year]|dictsort(by='key', reverse=True) %}
+      {% for month, stats in sorted_months %}
         <tr>
           <td>{{ month|readable_month }}</td>
           <td>{{ stats['count'] }}</td>
