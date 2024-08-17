@@ -32,7 +32,8 @@ def start():
 @auth.login_required
 def books_list():
     books = Book.objects.order_by('-date_start')
-    return BookSchema().dumps(books, many=True)
+    books_with_unfinished_first = sorted(books, key=lambda b: b.date_end is not None)
+    return BookSchema().dumps(books_with_unfinished_first, many=True)
 
 
 @router.route('/books/', methods=['POST'])
