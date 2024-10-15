@@ -1,12 +1,13 @@
+dnspython  # for mongo+srv scheme
 flask
-flask-wtf
 flask-httpauth
+flask-wtf
+funcy
 gunicorn
 jinja2
-python-dotenv
-mongoengine
-dnspython  # for mongo+srv scheme
-pendulum
 marshmallow
-funcy
+matplotlib
+mongoengine
+pendulum
+python-dotenv
 whatever

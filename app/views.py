@@ -1,4 +1,5 @@
 import os
+from base64 import b64encode
 from http import HTTPStatus
 
 from flask import Blueprint, current_app, render_template, request
@@ -7,7 +8,7 @@ from marshmallow import ValidationError
 
 from .documents import Book
 from .schemes import AddBoookSchema, BookSchema, EditBoookSchema
-from .utils import group_books
+from .utils import generate_scatter, group_books
 
 router = Blueprint(
     'router', __name__, template_folder='../templates', static_folder='../static'
@@ -69,4 +70,7 @@ def delete_book(book_id):
 @auth.login_required
 def stats():
     books = Book.objects.order_by('-date_start')
-    return render_template('stats.html', **group_books(books))
+    scatter = b64encode(generate_scatter(books)).decode()
+
+    context = {'scatter': (scatter), **group_books(books)}
+    return render_template('stats.html', **context)

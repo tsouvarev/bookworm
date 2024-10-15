@@ -1,9 +1,10 @@
-import re
+import io
 from collections import defaultdict
 from math import ceil
 
+import matplotlib.pyplot as plt
 from funcy import group_by
-from pendulum import Interval, interval
+from pendulum import Interval, interval, now
 from whatever import that
 
 from .documents import Book
@@ -22,7 +23,6 @@ READABLE_MONTH_NAMES = [
     'Ноябрь',
     'Декабрь',
 ]
-MINIMAL_HELPFUL_RATING = 3
 
 monthly_stats_skeleton = lambda: defaultdict(
     lambda: defaultdict(lambda: defaultdict(int))
@@ -32,6 +32,29 @@ yearly_stats_skeleton = lambda: defaultdict(lambda: defaultdict(int))
 
 def get_readable_month_name(month_number: int) -> str:
     return READABLE_MONTH_NAMES[month_number - 1]
+
+
+def generate_scatter(books: list[Book]) -> bytes:
+    finished_books = filter(that.date_end, books)
+
+    x, y, c, alpha = [], [], [], []
+    for book in finished_books:
+        oldness = now().year - book.date_end.year
+
+        x.append(book.pages_number)
+        y.append(book.days_reading)
+        c.append('navy' if book.is_english else 'salmon')
+        alpha.append(max(0.1, 0.5 - oldness / 10))
+
+    plt.xlabel('Pages')
+    plt.ylabel('Days')
+    plt.tight_layout()
+    plt.scatter(x, y, c=c, alpha=alpha, edgecolors='none')
+
+    with io.BytesIO() as buf:
+        plt.savefig(buf, format='png')
+        buf.seek(0)
+        return buf.getvalue()
 
 
 def group_books(books: list[Book]) -> tuple[dict, dict, dict]:
@@ -49,10 +72,10 @@ def group_books(books: list[Book]) -> tuple[dict, dict, dict]:
         book_yearly_stats = _get_yearly_stats(book)
         _update_yearly_stats(total_stats, book_yearly_stats)
 
-        if re.match('^[a-zA-Z0-9]+$', re.sub(r'[^\w]', '', book.title)):
+        if book.is_english:
             _update_yearly_stats(english_stats, book_yearly_stats)
 
-        if book.rating and book.rating > MINIMAL_HELPFUL_RATING:
+        if book.is_helpful:
             _update_yearly_stats(helpful_stats, book_yearly_stats)
 
     _update_total_stats(english_stats, total_stats)

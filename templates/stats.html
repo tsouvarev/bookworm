@@ -11,6 +11,8 @@
 {% endblock %}
 
 {% block body %}
+  <img src="data:image/png;base64,{{ scatter|safe }}"/>
+
   {% for year in monthly %}
     <table>
       <caption><h5>{{ year }}</h5></caption>
