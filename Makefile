@@ -1,29 +1,31 @@
+RUN = uv run --with-requirements requirements.dev.txt
+
 format:
-	ruff format .
-	ruff check . --fix-only
-	black .
+	$(RUN) ruff format .
+	$(RUN) ruff check . --fix-only
+	$(RUN) black .
 
 check:
-	ruff .
-	black --check .
+	$(RUN) ruff check .
+	$(RUN) black --check .
 
 install:
-	pip install -r requirements.dev.txt
+	uv pip install -r requirements.dev.txt
 
 upgrade:
-	pip-compile requirements.in -o requirements.txt -q --upgrade
+	uv pip compile requirements.in -o requirements.txt -q --upgrade
 
 compile:
-	pip-compile requirements.in -o requirements.txt -q
+	uv pip compile requirements.in -o requirements.txt -q
 
 run:
-	docker compose up --build app
+	docker-compose up --build app
 
 dev:
-	flask --app bookworm:create_app run --reload
+	$(RUN) flask --app bookworm:create_app run --reload
 
 test:
-	docker compose run app pytest
+	docker-compose run --rm app pytest
 
 generate:
-	python -m app.generate
+	$(RUN) python -m app.generate
