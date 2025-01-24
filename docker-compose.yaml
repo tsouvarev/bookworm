@@ -1,11 +1,11 @@
-version: "3.4"
-
 services:
   app:
     build:
       context: .
       target: dev
     environment:
+      FLASK_ENV: development
+      FLASK_APP: bookworm:create_app
       MONGO_URI: mongodb://bookworm:bookworm@db
     tty: true
     links:
@@ -15,7 +15,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-    - .:/opt
+      - .:/opt:Z
 
   db:
     image: "mongo:4"

@@ -8,8 +8,8 @@ RUN --mount=type=cache,target=/root/.cache/ pip install -r requirements.txt
 FROM base as dev
 COPY requirements.dev.txt .
 RUN --mount=type=cache,target=/root/.cache/ pip install -r requirements.dev.txt
-CMD ["flask", "--app bookworm:create_app", "run", "-h 0.0.0.0", "-p 3000"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=3000", "--debug"]
 
 FROM base as release
 COPY . .
-CMD ["gunicorn", "bookworm:app"]
+CMD ["gunicorn", "bookworm:create_app()"]
