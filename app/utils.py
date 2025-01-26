@@ -121,9 +121,9 @@ def _update_yearly_stats(stats: dict, book_yearly_stats: dict[int, int]) -> None
 
 
 def _update_total_stats(stats: dict, total_stats: dict) -> None:
-    for year in stats:
-        stats[year]['percent'] = _get_percent(stats, total_stats, year, field='count')
-        stats[year]['pages_percent'] = _get_percent(
+    for year, year_stats in stats.items():
+        year_stats['percent'] = _get_percent(stats, total_stats, year, field='count')
+        year_stats['pages_percent'] = _get_percent(
             stats, total_stats, year, field='pages'
         )
 

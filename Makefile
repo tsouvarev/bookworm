@@ -2,12 +2,10 @@ RUN = uv run --with-requirements requirements.dev.txt
 
 format:
 	$(RUN) ruff format .
-	$(RUN) ruff check . --fix-only
-	$(RUN) black .
+	$(RUN) ruff check . --fix-only --unsafe-fixes
 
 check:
 	$(RUN) ruff check .
-	$(RUN) black --check .
 
 install:
 	uv pip install -r requirements.dev.txt

@@ -33,8 +33,8 @@ class TestGroupBooks:
         grouped = group_books([book])
 
         assert grouped['monthly'] == {
-            2021: dict.fromkeys(range(2, 13), {'count': 1, 'pages': 1}),
-            2022: dict.fromkeys(range(1, 3), {'count': 1, 'pages': 1}),
+            2021: {key: {'count': 1, 'pages': 1} for key in range(2, 13)},
+            2022: {key: {'count': 1, 'pages': 1} for key in range(1, 3)},
         }
 
     def test_groups_english(self):

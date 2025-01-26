@@ -7,12 +7,12 @@ from werkzeug.test import Client
 from .factories import BookFactory
 
 
-@fixture()
+@fixture
 def book():
     return BookFactory.create()
 
 
-@fixture()
+@fixture
 def app():
     from bookworm import create_app
 
@@ -22,7 +22,7 @@ def app():
     return app
 
 
-@fixture()
+@fixture
 def client(app):
     return Client(app)
 
