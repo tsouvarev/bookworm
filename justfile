@@ -1,3 +1,4 @@
+set dotenv-load
 RUN := 'uv run'
 
 format:
@@ -24,3 +25,7 @@ test:
 
 generate:
 	{{ RUN }} python -m app.generate
+
+deploy:
+	docker build . --target release --tag cr.yandex/$YANDEX_REGISTRY_ID/bookworm
+	docker push cr.yandex/$YANDEX_REGISTRY_ID/bookworm
