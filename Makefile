@@ -1,4 +1,4 @@
-RUN = uv run --with-requirements requirements.dev.txt
+RUN = uv run
 
 format:
 	$(RUN) ruff format .
@@ -8,13 +8,10 @@ check:
 	$(RUN) ruff check .
 
 install:
-	uv pip install -r requirements.dev.txt
+	uv sync
 
 upgrade:
-	uv pip compile requirements.in -o requirements.txt -q --upgrade
-
-compile:
-	uv pip compile requirements.in -o requirements.txt -q
+	uv lock --upgrade
 
 run:
 	docker-compose up --build app

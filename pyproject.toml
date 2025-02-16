@@ -1,0 +1,27 @@
+[project]
+name = "bookworm"
+version = "1.0"
+requires-python = ">=3.12, <3.13"
+dependencies = [
+    "flask",
+    "flask-httpauth",
+    "flask-wtf",
+    "funcy",
+    "gunicorn",
+    "jinja2",
+    "marshmallow",
+    "matplotlib",
+    "mongoengine",
+    "pendulum",
+    "python-dotenv",
+    "whatever",
+]
+
+[dependency-groups]
+dev = [
+    "factory-boy",
+    "ipdb",
+    "pytest",
+    "pytest-mock",
+    "ruff",
+]
