@@ -12,4 +12,4 @@ CMD ["uv", "run", "flask", "run", "--host=0.0.0.0", "--port=3000", "--debug"]
 FROM base as release
 RUN uv sync --frozen --no-cache
 COPY . .
-CMD ["uv", "run", "gunicorn", "bookworm:create_app()"]
+CMD ["uv", "run", "gunicorn", "--bind", "0.0.0.0:5000", "bookworm:create_app()"]

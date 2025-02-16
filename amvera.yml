@@ -3,5 +3,4 @@ meta:
   toolchain:
     name: docker
 run:
-  command: uv run gunicorn --bind 0.0.0.0:5000 'bookworm:create_app()'
   containerPort: 5000
