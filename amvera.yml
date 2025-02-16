@@ -1,10 +1,7 @@
 meta:
-  environment: python
+  environment: docker
   toolchain:
-    name: pip
-    version: 3.12
-build:
-  requirementsPath: requirements.txt
+    name: docker
 run:
   command: gunicorn --bind 0.0.0.0:5000 'bookworm:create_app()'
   containerPort: 5000
