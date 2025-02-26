@@ -16,6 +16,7 @@ services:
       - 3000:3000
     volumes:
       - .:/opt:Z
+      - /opt/.venv
 
   db:
     image: "mongo:4"
