@@ -4,11 +4,11 @@ from http import HTTPStatus
 
 from flask import Blueprint, current_app, render_template, request
 from flask_httpauth import HTTPBasicAuth
-from marshmallow import ValidationError
+from pydantic import ValidationError
 
 from .documents import Book
-from .schemes import AddBoookSchema, BookSchema, EditBoookSchema
-from .utils import generate_scatter, group_books
+from .schemes import AddBookSchema, BookSchema, EditBookSchema
+from .utils import generate_scatter, get_error_messages, group_books, model_dump
 
 router = Blueprint(
     'router', __name__, template_folder='../templates', static_folder='../static'
@@ -34,28 +34,33 @@ def start():
 def books_list():
     books = Book.objects.order_by('-date_start')
     books_with_unfinished_first = sorted(books, key=lambda b: b.date_end is not None)
-    return BookSchema().dumps(books_with_unfinished_first, many=True)
+
+    return model_dump(BookSchema, books_with_unfinished_first, many=True)
 
 
 @router.route('/books/', methods=['POST'])
 @auth.login_required
 def add_book():
     try:
-        data = AddBoookSchema().load(request.json)
+        data = AddBookSchema(**request.json).model_dump()
     except ValidationError as err:
-        return {'errors': err.messages}, HTTPStatus.BAD_REQUEST
+        return {'errors': get_error_messages(err)}, HTTPStatus.BAD_REQUEST
+
     book = Book(**data).save()
-    return BookSchema().dumps(book)
+
+    return model_dump(BookSchema, book)
 
 
 @router.route('/books/<book_id>/', methods=['PATCH'])
 @auth.login_required
 def edit_book(book_id):
     try:
-        data = EditBoookSchema().load(request.json)
+        data = EditBookSchema(**request.json).model_dump()
     except ValidationError as err:
-        return {'errors': err.messages}, HTTPStatus.BAD_REQUEST
+        return {'errors': get_error_messages(err)}, HTTPStatus.BAD_REQUEST
+
     Book.objects.filter(id=book_id).update(**data)
+
     return {}
 
 

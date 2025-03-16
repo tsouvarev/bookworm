@@ -25,3 +25,14 @@ split-on-trailing-comma = false
 [lint.per-file-ignores]
 'app/generate.py' = ['T201']
 'tests/*' = ['S101', 'PT013', 'PT004', 'RUF012', 'DTZ001']
+
+[lint.pep8-naming]
+classmethod-decorators = [
+    "classmethod",
+    "pydantic.validator",
+    "pydantic.field_validator",
+]
+staticmethod-decorators = [
+    "staticmethod",
+    "pydantic.field_serializer",
+]

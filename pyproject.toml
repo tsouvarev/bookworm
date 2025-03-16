@@ -9,10 +9,10 @@ dependencies = [
     "funcy",
     "gunicorn",
     "jinja2",
-    "marshmallow",
     "matplotlib",
     "mongoengine",
     "pendulum",
+    "pydantic",
     "python-dotenv",
     "whatever",
 ]

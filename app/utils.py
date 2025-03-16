@@ -5,6 +5,7 @@ from math import ceil
 import matplotlib.pyplot as plt
 from funcy import group_by
 from pendulum import Interval, interval, now
+from pydantic import TypeAdapter, ValidationError
 from whatever import that
 
 from .documents import Book
@@ -28,6 +29,19 @@ monthly_stats_skeleton = lambda: defaultdict(
     lambda: defaultdict(lambda: defaultdict(int))
 )
 yearly_stats_skeleton = lambda: defaultdict(lambda: defaultdict(int))
+
+
+def get_error_messages(err: ValidationError) -> dict:
+    # dict of {field: message}
+    return {e['loc'][0]: e['msg'] for e in err.errors()}
+
+
+def model_dump(model, data, *, many: bool = False) -> list | dict:
+    if many:
+        ta = TypeAdapter(list[model])
+        return ta.dump_python(ta.validate_python(data))
+
+    return model.model_validate(data).model_dump()
 
 
 def get_readable_month_name(month_number: int) -> str:
