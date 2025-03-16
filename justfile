@@ -15,13 +15,13 @@ upgrade:
 	uv lock --upgrade
 
 run:
-	docker-compose up --build app
+	docker compose up --build app
 
 dev:
 	{{ RUN }} flask --app bookworm:create_app run --reload
 
 test:
-	docker-compose run --rm app pytest
+	docker compose run --rm app {{ RUN }} pytest
 
 generate:
 	{{ RUN }} python -m app.generate
