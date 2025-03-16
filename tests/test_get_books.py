@@ -37,7 +37,7 @@ def _serialize_book(book, **extra):
         'author': book.author,
         'title': book.title,
         'pages_number': book.pages_number,
-        'date_start': book.date_start.date().isoformat(),
+        'date_start': None,
         'date_end': None,
         'comment': None,
         'rating': None,

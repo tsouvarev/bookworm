@@ -1,20 +1,15 @@
 import re
 
 import mongoengine
-import pendulum
 
 MINIMAL_HELPFUL_RATING = 3
-
-
-def _now():
-    return pendulum.now('Europe/Moscow')
 
 
 class Book(mongoengine.Document):
     author = mongoengine.StringField(required=True)
     title = mongoengine.StringField(required=True)
     pages_number = mongoengine.IntField(required=True)
-    date_start = mongoengine.DateField(default=_now)
+    date_start = mongoengine.DateField()
     date_end = mongoengine.DateField()
     comment = mongoengine.StringField()
     rating = mongoengine.IntField()
