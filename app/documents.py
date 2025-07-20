@@ -16,8 +16,15 @@ class Book(mongoengine.Document):
 
     @property
     def is_english(self) -> bool:
+        # russian books might have english name,
+        # but english books always have english author
+        clean_author = re.sub(r'[^\w]', '', self.author)
         clean_title = re.sub(r'[^\w]', '', self.title)
-        return bool(re.match('^[a-zA-Z0-9]+$', clean_title))
+
+        has_english_author = re.match('^[a-zA-Z0-9]+$', clean_author)
+        has_english_title = re.match('^[a-zA-Z0-9]+$', clean_title)
+
+        return bool(has_english_author and has_english_title)
 
     @property
     def is_helpful(self) -> bool:
