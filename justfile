@@ -21,7 +21,7 @@ dev:
 	{{ RUN }} flask --app bookworm:create_app run --reload
 
 test:
-	docker compose run --rm app {{ RUN }} pytest
+	docker compose run --build --rm app {{ RUN }} pytest
 
 generate:
 	{{ RUN }} python -m app.generate
