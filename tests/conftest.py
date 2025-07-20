@@ -14,7 +14,7 @@ def book():
 
 @fixture
 def app():
-    from bookworm import create_app
+    from bookworm import create_app  # noqa: PLC0415
 
     app = create_app(with_csrf=False)
     app.config |= {'TESTING': True}
