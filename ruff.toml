@@ -1,4 +1,4 @@
-target-version = 'py312'
+target-version = 'py314'
 
 [format]
 quote-style = 'single'
@@ -13,6 +13,9 @@ ignore = [
     'SLF001',  # private member accessed
     'COM812', # trailing comma missing
     'E731', # do not assign a `lambda` expression, use a `def`
+    'TC001', # Move application import into a type-checking block
+    'TC002', # Move third-party import into a type-checking block
+    'TC003', # Move standard library import into a type-checking block
 ]
 
 [lint.flake8-quotes]

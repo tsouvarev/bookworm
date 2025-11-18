@@ -6,7 +6,7 @@ from tests.factories import BookFactory
 
 
 class TestGroupBooks:
-    _create_book = partial(BookFactory.create, with_date_end=True)
+    _create_book = staticmethod(partial(BookFactory.create, with_date_end=True))
 
     def test_monthly_skips_books_without_date_end(self):
         book = BookFactory.create(with_date_start=True)
