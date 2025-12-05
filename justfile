@@ -1,5 +1,5 @@
 set dotenv-load
-RUN := 'uv run'
+RUN := 'uv run --frozen'
 
 format:
 	{{ RUN }} ruff format .
