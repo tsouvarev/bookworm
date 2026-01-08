@@ -13,7 +13,7 @@
 {% block body %}
   <img src="data:image/png;base64,{{ scatter|safe }}"/>
 
-  {% for year in monthly %}
+  {% for year in monthly|sort(reverse=True) %}
     <table>
       <caption><h5>{{ year }}</h5></caption>
       <thead>
