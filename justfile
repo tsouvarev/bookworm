@@ -29,3 +29,7 @@ generate:
 deploy:
 	docker build . --target release --tag cr.yandex/$YANDEX_REGISTRY_ID/bookworm
 	docker push cr.yandex/$YANDEX_REGISTRY_ID/bookworm
+
+dump:
+	docker run -v .:/mnt:z --user $(id -u $USER):$(id -g $USER) \
+	mongo mongoexport --uri $MONGO_URI --collection book --out /mnt/dump.json
